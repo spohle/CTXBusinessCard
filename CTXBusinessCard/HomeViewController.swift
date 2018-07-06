@@ -11,14 +11,23 @@ import ARKit
 
 class HomeViewController: UIViewController {
 
-    let arConfig = ARWorldTrackingConfiguration()
     var screenCenter: CGPoint?
     var isPlaneAdded: Bool = false
+    
+    var session: ARSession?
+    
+    let updateQueye = DispatchQueue(label: Bundle.main.bundleIdentifier! + ".serialSceneKitQueue")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Prevent the screen from being dimmed after a while as users will likely
+        // have long periods of interaction without touching the screen or buttons.
+        UIApplication.shared.isIdleTimerDisabled = true
+        
         setupUserInterface()
         setupARSCene()
+        
+        self.session = uiARView.session
     }
 }

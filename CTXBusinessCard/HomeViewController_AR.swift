@@ -13,6 +13,7 @@ extension HomeViewController: ARSCNViewDelegate {
     func setupARSCene() {
         uiARView.delegate = self
         uiARView.scene = SCNScene()
+        uiARView.session.delegate = self
         uiARView.showsStatistics = false
         uiARView.antialiasingMode = .multisampling4X
         uiARView.contentScaleFactor = 1.0
@@ -27,36 +28,61 @@ extension HomeViewController: ARSCNViewDelegate {
             camera.exposureOffset = -1
             camera.minimumExposure = -1
         }
+        
+    }
+    
+    func resetTracking() {
+        let refImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: Bundle.main)
+        
+        let config = ARWorldTrackingConfiguration()
+        config.detectionImages = refImages
+        session?.run(config, options: [.resetTracking, .removeExistingAnchors])
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        arConfig.planeDetection = .horizontal
-        uiARView.session.run(arConfig)
+        // Start the AR experience
+        resetTracking()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        uiARView.session.pause()
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        if isPlaneAdded {
-            return
-        }
+        guard let imageAnchor = anchor as? ARImageAnchor else { return }
         
-        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+        let refImage = imageAnchor.referenceImage
         
         DispatchQueue.main.async {
-            uiAddButton.isHidden = false
+            let plane = SCNPlane(width: refImage.physicalSize.width, height: refImage.physicalSize.height)
+            plane.materials.first?.diffuse.contents = UIColor.red
+            let planeNode = SCNNode(geometry: plane)
+            planeNode.opacity = 0.25
+            planeNode.eulerAngles.x = -.pi/2
+            planeNode.runAction(self.imageHighlightAction)
+            node.addChildNode(planeNode)
         }
-        
-        let geo = SCNPlane(width: CGFloat(planeAnchor.extent.x), height: CGFloat(planeAnchor.extent.z))
-        geo.materials.first?.diffuse.contents = UIImage(named: "grid.jpg")
-        geo.materials.first?.transparency = 0.5
-        let planeNode = SCNNode(geometry: geo)
-        planeNode.position = SCNVector3Make(planeAnchor.center.x, 0, planeAnchor.center.z)
-        planeNode.eulerAngles = SCNVector3Make(-Float.pi/2, 0, 0)
-        node.addChildNode(planeNode)
     }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+    }
+    
+    var imageHighlightAction: SCNAction {
+        return .sequence([
+            .wait(duration: 0.25),
+            .fadeOpacity(to: 0.85, duration: 0.25),
+            .fadeOpacity(to: 0.15, duration: 0.25),
+            .fadeOpacity(to: 0.85, duration: 0.25)
+        ])
+    }
+}
+
+extension HomeViewController: ARSessionDelegate {
+    
 }

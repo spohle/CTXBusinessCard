@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5729047B20F0150C00F20ECC /* RectangularPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729047A20F0150C00F20ECC /* RectangularPlane.swift */; };
+		5757FF8C20EF152E009EA577 /* ARView_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5757FF8B20EF152E009EA577 /* ARView_Extensions.swift */; };
 		57B0729520EB14EB002AC449 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B0729420EB14EB002AC449 /* AppDelegate.swift */; };
 		57B0729C20EB14EC002AC449 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57B0729B20EB14EC002AC449 /* Assets.xcassets */; };
 		57B0729F20EB14EC002AC449 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57B0729D20EB14EC002AC449 /* LaunchScreen.storyboard */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5729047A20F0150C00F20ECC /* RectangularPlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularPlane.swift; sourceTree = "<group>"; };
+		5757FF8B20EF152E009EA577 /* ARView_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView_Extensions.swift; sourceTree = "<group>"; };
 		57B0729120EB14EB002AC449 /* CTXBusinessCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTXBusinessCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57B0729420EB14EB002AC449 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57B0729B20EB14EC002AC449 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,7 +66,9 @@
 				57B072A020EB14EC002AC449 /* Info.plist */,
 				57B072A620EB1508002AC449 /* HomeViewController.swift */,
 				57B072A820EB15CF002AC449 /* HomeViewController_UI.swift */,
+				5757FF8B20EF152E009EA577 /* ARView_Extensions.swift */,
 				57B072AA20EB1694002AC449 /* HomeViewController_AR.swift */,
+				5729047A20F0150C00F20ECC /* RectangularPlane.swift */,
 			);
 			path = CTXBusinessCard;
 			sourceTree = "<group>";
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5757FF8C20EF152E009EA577 /* ARView_Extensions.swift in Sources */,
 				57B072AB20EB1694002AC449 /* HomeViewController_AR.swift in Sources */,
 				57B0729520EB14EB002AC449 /* AppDelegate.swift in Sources */,
+				5729047B20F0150C00F20ECC /* RectangularPlane.swift in Sources */,
 				57B072A920EB15CF002AC449 /* HomeViewController_UI.swift in Sources */,
 				57B072A720EB1508002AC449 /* HomeViewController.swift in Sources */,
 			);

@@ -9,22 +9,28 @@
 import Foundation
 import ARKit
 
+class AddButton: UIButton {
+    override init(frame: CGRect) {
+        super.init(frame: CGRect.zero)
+        
+        self.setImage(UIImage(named: "add.png"), for: .normal)
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 let uiARView: ARSCNView = {
    let view = ARSCNView()
     
     view.debugOptions = ARSCNDebugOptions.showFeaturePoints
-    
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
 }()
 
-let uiAddButton: UIButton = {
-   let button = UIButton()
-    button.setImage(UIImage(named: "add.png"), for: .normal)
-    button.translatesAutoresizingMaskIntoConstraints = false
-    button.isHidden = true
-    return button
-}()
+let uiAddButton = AddButton()
 
 extension HomeViewController {
     override var prefersStatusBarHidden: Bool {
@@ -43,6 +49,7 @@ extension HomeViewController {
         uiAddButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         uiAddButton.widthAnchor.constraint(equalToConstant: 75).isActive = true
         uiAddButton.heightAnchor.constraint(equalToConstant: 75).isActive = true
+        uiAddButton.isHidden = true
     }
     
 }
