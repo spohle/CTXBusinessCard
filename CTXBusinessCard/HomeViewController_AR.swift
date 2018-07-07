@@ -13,7 +13,6 @@ extension HomeViewController: ARSCNViewDelegate {
     func setupARSCene() {
         uiARView.delegate = self
         uiARView.scene = SCNScene()
-        uiARView.session.delegate = self
         uiARView.showsStatistics = false
         uiARView.antialiasingMode = .multisampling4X
         uiARView.contentScaleFactor = 1.0
@@ -28,7 +27,6 @@ extension HomeViewController: ARSCNViewDelegate {
             camera.exposureOffset = -1
             camera.minimumExposure = -1
         }
-        
     }
     
     func resetTracking() {
@@ -36,7 +34,7 @@ extension HomeViewController: ARSCNViewDelegate {
         
         let config = ARWorldTrackingConfiguration()
         config.detectionImages = refImages
-        session?.run(config, options: [.resetTracking, .removeExistingAnchors])
+        session?.run(config)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -67,22 +65,34 @@ extension HomeViewController: ARSCNViewDelegate {
             planeNode.eulerAngles.x = -.pi/2
             planeNode.runAction(self.imageHighlightAction)
             node.addChildNode(planeNode)
+            
+            uiAddButton.isHidden = false
+            uiAddButton.pulsate()
+            
+            guard let scene = SCNScene(named: "Art.scnassets/iphone.scn") else { return }
+            guard let sceneRoot = scene.rootNode.childNode(withName: "root", recursively: false) else { return }
+            
+            node.addChildNode(sceneRoot)
         }
     }
     
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
     }
     
+    func renderer(_ renderer: SCNSceneRenderer, didRemove node: SCNNode, for anchor: ARAnchor) {
+        print("wait, why did we remove a node?")
+    }
+    
     var imageHighlightAction: SCNAction {
         return .sequence([
-            .wait(duration: 0.25),
+            .scale(to: 0.25, duration: 0.25),
+            .scale(to: 1.0, duration: 0.25),
             .fadeOpacity(to: 0.85, duration: 0.25),
             .fadeOpacity(to: 0.15, duration: 0.25),
-            .fadeOpacity(to: 0.85, duration: 0.25)
+            .fadeOpacity(to: 0.85, duration: 0.25),
+            .fadeOpacity(to: 0.0, duration: 0.5)
         ])
     }
 }
 
-extension HomeViewController: ARSessionDelegate {
-    
-}
+
