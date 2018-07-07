@@ -66,6 +66,7 @@ extension HomeViewController: ARSCNViewDelegate {
             planeNode.eulerAngles.x = -.pi/2
             node.addChildNode(planeNode)
             
+            uiInfoLabel.text = "Image Detected"
             
             planeNode.runAction(uiAddButton.imageHighlightAction, completionHandler: {
                 plane.materials.first?.diffuse.contents = UIImage(named: "grid_simple.png")
