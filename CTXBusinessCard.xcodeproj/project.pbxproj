@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5729047B20F0150C00F20ECC /* RectangularPlane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729047A20F0150C00F20ECC /* RectangularPlane.swift */; };
-		5729047E20F1260000F20ECC /* UIButton_ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5729047D20F1260000F20ECC /* UIButton_ext.swift */; };
 		5729048020F1271100F20ECC /* Art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5729047F20F1271100F20ECC /* Art.scnassets */; };
 		5757FF8C20EF152E009EA577 /* ARView_Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5757FF8B20EF152E009EA577 /* ARView_Extensions.swift */; };
 		57B0729520EB14EB002AC449 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B0729420EB14EB002AC449 /* AppDelegate.swift */; };
@@ -21,7 +20,6 @@
 
 /* Begin PBXFileReference section */
 		5729047A20F0150C00F20ECC /* RectangularPlane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularPlane.swift; sourceTree = "<group>"; };
-		5729047D20F1260000F20ECC /* UIButton_ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton_ext.swift; sourceTree = "<group>"; };
 		5729047F20F1271100F20ECC /* Art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Art.scnassets; sourceTree = "<group>"; };
 		5757FF8B20EF152E009EA577 /* ARView_Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARView_Extensions.swift; sourceTree = "<group>"; };
 		57B0729120EB14EB002AC449 /* CTXBusinessCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CTXBusinessCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,7 +71,6 @@
 				57B072A820EB15CF002AC449 /* HomeViewController_UI.swift */,
 				5757FF8B20EF152E009EA577 /* ARView_Extensions.swift */,
 				57B072AA20EB1694002AC449 /* HomeViewController_AR.swift */,
-				5729047D20F1260000F20ECC /* UIButton_ext.swift */,
 				5729047A20F0150C00F20ECC /* RectangularPlane.swift */,
 			);
 			path = CTXBusinessCard;
@@ -152,7 +149,6 @@
 			files = (
 				5757FF8C20EF152E009EA577 /* ARView_Extensions.swift in Sources */,
 				57B072AB20EB1694002AC449 /* HomeViewController_AR.swift in Sources */,
-				5729047E20F1260000F20ECC /* UIButton_ext.swift in Sources */,
 				57B0729520EB14EB002AC449 /* AppDelegate.swift in Sources */,
 				5729047B20F0150C00F20ECC /* RectangularPlane.swift in Sources */,
 				57B072A920EB15CF002AC449 /* HomeViewController_UI.swift in Sources */,

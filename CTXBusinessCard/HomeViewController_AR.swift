@@ -30,10 +30,11 @@ extension HomeViewController: ARSCNViewDelegate {
     }
     
     func resetTracking() {
-        let refImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: Bundle.main)
+//        let refImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: Bundle.main)
+        let coco = ARReferenceImage((UIImage(named: "coco.png")?.cgImage)!, orientation: .up, physicalWidth: 0.19)
         
         let config = ARWorldTrackingConfiguration()
-        config.detectionImages = refImages
+        config.detectionImages = [coco]
         session?.run(config)
     }
     
@@ -63,16 +64,13 @@ extension HomeViewController: ARSCNViewDelegate {
             let planeNode = SCNNode(geometry: plane)
             planeNode.opacity = 0.25
             planeNode.eulerAngles.x = -.pi/2
-            planeNode.runAction(self.imageHighlightAction)
             node.addChildNode(planeNode)
             
-            uiAddButton.isHidden = false
-            uiAddButton.pulsate()
             
-            guard let scene = SCNScene(named: "Art.scnassets/iphone.scn") else { return }
-            guard let sceneRoot = scene.rootNode.childNode(withName: "root", recursively: false) else { return }
-            
-            node.addChildNode(sceneRoot)
+            planeNode.runAction(uiAddButton.imageHighlightAction, completionHandler: {
+                plane.materials.first?.diffuse.contents = UIImage(named: "grid_simple.png")
+                uiAddButton.showButton()
+            })
         }
     }
     
@@ -83,16 +81,7 @@ extension HomeViewController: ARSCNViewDelegate {
         print("wait, why did we remove a node?")
     }
     
-    var imageHighlightAction: SCNAction {
-        return .sequence([
-            .scale(to: 0.25, duration: 0.25),
-            .scale(to: 1.0, duration: 0.25),
-            .fadeOpacity(to: 0.85, duration: 0.25),
-            .fadeOpacity(to: 0.15, duration: 0.25),
-            .fadeOpacity(to: 0.85, duration: 0.25),
-            .fadeOpacity(to: 0.0, duration: 0.5)
-        ])
-    }
+    
 }
 
 

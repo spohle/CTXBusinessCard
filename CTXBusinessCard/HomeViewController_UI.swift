@@ -25,6 +25,36 @@ class AddButton: UIButton {
     @objc func handleClick() {
         print("hey someone clicked the Button")
     }
+    
+    func showButton() {
+        DispatchQueue.main.async {
+            self.isHidden = false
+            self.pulsate()
+        }
+    }
+    
+    func pulsate() {
+        let pulse = CASpringAnimation(keyPath: "transform.scale")
+        pulse.duration = 0.6
+        pulse.fromValue = 0.8
+        pulse.toValue = 1.0
+        pulse.autoreverses = true
+        pulse.repeatCount = 2
+        pulse.initialVelocity = 0.5
+        pulse.damping = 1.0
+        
+        layer.add(pulse, forKey: nil)
+    }
+    
+    var imageHighlightAction: SCNAction {
+        return .sequence([
+            .scale(to: 0.25, duration: 0.25),
+            .scale(to: 1.0, duration: 0.25),
+            .fadeOpacity(to: 0.85, duration: 0.25),
+            .fadeOpacity(to: 0.15, duration: 0.25),
+            .fadeOpacity(to: 0.85, duration: 0.25)
+            ])
+    }
 }
 
 let uiARView: ARSCNView = {
